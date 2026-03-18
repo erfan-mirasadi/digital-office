@@ -1,5 +1,6 @@
 "use client";
 
+// We initialize the Theatre.js project and sheet here so they can be imported and used in any component without worrying about initialization order
 import { getProject } from "@theatre/core";
 import projectState from "@/data/DigitalOfficeProject.theatre-project-state.json";
 // import studio from "@theatre/studio";
@@ -11,6 +12,5 @@ import projectState from "@/data/DigitalOfficeProject.theatre-project-state.json
 //   studio.extend(extension);
 // }
 
-// Create the project and sheet strictly based on official docs
 const project = getProject("DigitalOfficeProject", { state: projectState });
 export const officeSheet = project.sheet("OfficeSceneSheet");

@@ -26,8 +26,6 @@ export default function RoomOverlay({
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Auto-scroll to the bottom when a new message arrives
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -36,7 +34,6 @@ export default function RoomOverlay({
     scrollToBottom();
   }, [messages]);
 
-  // Handle room entering and initial fake message
   if (currentRoom !== displayRoom) {
     setDisplayRoom(currentRoom);
     if (currentRoom) {
@@ -52,7 +49,6 @@ export default function RoomOverlay({
     }
   }
 
-  // Handle sending a message
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
@@ -71,7 +67,6 @@ export default function RoomOverlay({
     setMessages((prev) => [...prev, myMessage]);
     setInputValue("");
 
-    // Fake an auto-reply from a "Colleague" after 1 second
     setTimeout(() => {
       const botReply: Message = {
         id: (Date.now() + 1).toString(),
@@ -91,16 +86,13 @@ export default function RoomOverlay({
 
   return (
     <>
-      {/* Scroll Hint (shows when not in a room and before threshold) */}
       <ScrollHint isHidden={isOpen || hideScrollHint} />
 
-      {/* Chat Panel Overlay - MOVED TO RIGHT */}
       <div
         className={`fixed top-0 right-0 w-100 h-full bg-slate-900/85 backdrop-blur-xl border-l border-white/10 text-white flex flex-col shadow-[-10px_0_30px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-in-out z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Header */}
         <div className="px-6 py-5 border-b border-white/10 flex justify-between items-center bg-slate-950/50">
           <div>
             <h2 className="text-xl font-black text-white flex items-center gap-2">
@@ -133,7 +125,6 @@ export default function RoomOverlay({
           </button>
         </div>
 
-        {/* Chat Messages Area */}
         <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-5 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
           {messages.map((msg) => (
             <div
@@ -163,8 +154,6 @@ export default function RoomOverlay({
           ))}
           <div ref={messagesEndRef} />
         </div>
-
-        {/* Chat Input Box */}
         <div className="p-4 border-t border-white/10 bg-slate-950/50">
           <form
             onSubmit={handleSendMessage}
