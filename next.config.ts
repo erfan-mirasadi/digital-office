@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  transpilePackages: ["@theatre/core", "@theatre/studio", "@theatre/r3f"],
 };
 
 export default nextConfig;
