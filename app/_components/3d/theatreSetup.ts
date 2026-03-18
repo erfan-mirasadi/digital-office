@@ -1,7 +1,7 @@
 "use client";
 
 import { getProject } from "@theatre/core";
-import projectState from "./DigitalOfficeProject.theatre-project-state.json";
+import projectState from "@/data/DigitalOfficeProject.theatre-project-state.json";
 // import studio from "@theatre/studio";
 // import extension from "@theatre/r3f/dist/extension";
 
