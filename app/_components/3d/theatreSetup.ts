@@ -1,18 +1,16 @@
 "use client";
 
 import { getProject } from "@theatre/core";
+import projectState from "./DigitalOfficeProject.theatre-project-state.json";
+// import studio from "@theatre/studio";
+// import extension from "@theatre/r3f/dist/extension";
 
-// Theatre.js project & sheet for the office scene
-const project = getProject("Digital Office");
-export const officeSheet = project.sheet("Office Scene");
+// Initialize studio only in development mode to avoid prod bugs
+// if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+//   studio.initialize();
+//   studio.extend(extension);
+// }
 
-// Conditionally load Studio + R3F extension in dev mode only
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  import("@theatre/studio").then((studioModule) => {
-    const studio = studioModule.default;
-    import("@theatre/r3f/dist/extension").then((extensionModule) => {
-      studio.initialize();
-      studio.extend(extensionModule.default);
-    });
-  });
-}
+// Create the project and sheet strictly based on official docs
+const project = getProject("DigitalOfficeProject", { state: projectState });
+export const officeSheet = project.sheet("OfficeSceneSheet");
